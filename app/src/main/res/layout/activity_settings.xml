@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.itzik.pc.activities.SettingsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/setting_select_apps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/transparent"
+            android:drawableTint="@color/colorPrimary"
+            android:drawableTop="@drawable/ic_apps_black_24dp"
+            android:padding="10dp"
+            android:text="App"/>
+
+        <Button
+            android:id="@+id/setting_set_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/transparent"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:drawableTop="@drawable/ic_lock_black_24dp"
+            android:padding="10dp"
+            android:text="Set password"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/setting_set_time_limit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/transparent"
+        android:drawableTint="@color/colorAccent"
+        android:drawableTop="@drawable/ic_access_time_black_24dp"
+        android:padding="10dp"
+        android:text="Set Time Limit"/>
+</LinearLayout>
