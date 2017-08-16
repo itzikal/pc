@@ -60,11 +60,9 @@ public class AppManager
     public void updateApps()
     {
         mApps.update(getPreferences().getApps());
-
+        ArrayList<AppDetail> savedApps = mApps.getApps();
         final PackageManager manager = mContext.getPackageManager();
 
-
-//TODO: need to remove uninstall apps.
         Intent i = new Intent(Intent.ACTION_MAIN, null);
         i.addCategory(Intent.CATEGORY_LAUNCHER);
 
@@ -79,7 +77,9 @@ public class AppManager
             {
                 mApps.addApp(app);
             }
+            savedApps.remove(app);
         }
+        mApps.removeApps(savedApps);
         saveAppStates();
     }
 

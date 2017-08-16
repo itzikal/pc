@@ -1,5 +1,7 @@
 package com.itzik.pc.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 
 public class AppsList
 {
+    private static final String LOG_TAG = AppsList.class.getSimpleName();
     @SerializedName("AppList")
     private final ArrayList<AppDetail> mApps = new ArrayList<>();
 
@@ -62,5 +65,15 @@ public class AppsList
         }
         mApps.clear();
         mApps.addAll(apps.getApps());
+    }
+
+    public void removeApps(final ArrayList<AppDetail> appsToRemove)
+    {
+        for (AppDetail appDetail : appsToRemove)
+        {
+            Log.d(LOG_TAG, "removeApps(), app:" + appDetail.getAppName());
+        }
+
+        mApps.removeAll(appsToRemove);
     }
 }
