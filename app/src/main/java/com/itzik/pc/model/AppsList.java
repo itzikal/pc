@@ -18,7 +18,7 @@ public class AppsList
 
     public ArrayList<AppDetail> getApps()
     {
-        return mApps;
+        return new ArrayList<>(mApps);
     }
 
     public ArrayList<AppDetail> getPremittedApps()
@@ -52,5 +52,15 @@ public class AppsList
     public void addApp(final AppDetail app)
     {
         mApps.add(app);
+    }
+
+    public void update(final AppsList apps)
+    {
+        if(apps == null)
+        {
+            return;
+        }
+        mApps.clear();
+        mApps.addAll(apps.getApps());
     }
 }

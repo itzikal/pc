@@ -1,6 +1,15 @@
 package com.itzik.pc.managers;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+
+import com.itzik.pc.model.AppDetail;
+import com.itzik.pc.model.AppsList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by itzikalkotzer on 09/08/2017.
@@ -9,6 +18,8 @@ import android.content.Context;
 public class AppManager
 {
     private static final String LOG_TAG = AppManager.class.getSimpleName();
+    private AppsList mApps = new AppsList();
+
     private static AppManager mInstance;
     private Context mContext;
     private PreferancesManager mPreferences;
@@ -16,6 +27,7 @@ public class AppManager
     private AppManager(Context context)
     {
         mContext = context;
+        updateApps();
     }
 
     public static AppManager getInstance()
@@ -43,5 +55,45 @@ public class AppManager
             mPreferences = new PreferancesManager(mContext);
         }
         return mPreferences;
+    }
+
+    public void updateApps()
+    {
+        mApps.update(getPreferences().getApps());
+
+        final PackageManager manager = mContext.getPackageManager();
+
+
+//TODO: need to remove uninstall apps.
+        Intent i = new Intent(Intent.ACTION_MAIN, null);
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
+
+        List<ResolveInfo> availableActivities = manager.queryIntentActivities(i, 0);
+        for (ResolveInfo ri : availableActivities)
+        {
+
+            AppDetail app = new AppDetail();
+            app.setAppName(ri.loadLabel(manager).toString());
+            app.setAppPackage(ri.activityInfo.packageName);
+            if(!mApps.isContainsApp(app))
+            {
+                mApps.addApp(app);
+            }
+        }
+        saveAppStates();
+    }
+
+    public ArrayList<AppDetail> getAllowedApps()
+    {
+        return mApps.getPremittedApps();
+    }
+
+    public ArrayList<AppDetail> getAllApps(){
+        return mApps.getApps();
+    }
+
+    public void saveAppStates()
+    {
+        getPreferences().saveApps(mApps);
     }
 }

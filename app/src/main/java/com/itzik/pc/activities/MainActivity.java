@@ -15,8 +15,9 @@ import com.itzik.pc.interfaces.AppItemClickListener;
 import com.itzik.pc.managers.AppManager;
 import com.itzik.pc.managers.PreferencesWrapper;
 import com.itzik.pc.model.AppDetail;
-import com.itzik.pc.model.AppsList;
 import com.itzik.pc.utils.TextUtil;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity
 //
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
 
         findViewById(R.id.show_app_list).setOnClickListener(new View.OnClickListener()
@@ -101,14 +102,8 @@ public class MainActivity extends AppCompatActivity
     public void onResume()
     {
         super.onResume();
-        AppsList l = AppManager.getInstance().getPreferences().getPremitedApps();
-        if (l == null)
-        {
-            return;
-        }
-
-        mAdapter.addApps(l.getPremittedApps());
-
+        ArrayList<AppDetail> allowedApps = AppManager.getInstance().getAllowedApps();
+        mAdapter.addApps(allowedApps);
     }
 
     @Override

@@ -17,12 +17,12 @@ public class PreferancesManager
         mPreferencesWrapper = new PreferencesWrapper(context);
     }
 
-    public void savePremitedApps(AppsList list)
+    public void saveApps(AppsList list)
     {
         mPreferencesWrapper.putObject(SAVE_PREMITED_APPS, list);
     }
 
-    public AppsList getPremitedApps()
+    public AppsList getApps()
     {
        return mPreferencesWrapper.getObject(SAVE_PREMITED_APPS, AppsList.class);
     }
