@@ -43,6 +43,11 @@ public class AppsList
         return mApps.contains(detail);
     }
 
+    public AppDetail getApp(String packageName)
+    {
+        return getApp(new AppDetail(packageName));
+    }
+
     public AppDetail getApp(final AppDetail app)
     {
         if(mApps.contains(app))

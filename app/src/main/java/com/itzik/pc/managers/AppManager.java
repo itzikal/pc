@@ -83,6 +83,9 @@ public class AppManager
         saveAppStates();
     }
 
+    public AppsList getAppsList(){
+        return mApps;
+    }
     public ArrayList<AppDetail> getAllowedApps()
     {
         return mApps.getPremittedApps();

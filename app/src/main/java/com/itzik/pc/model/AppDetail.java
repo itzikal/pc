@@ -19,6 +19,15 @@ public class AppDetail
     @SerializedName("name")
     private String mAppPackage;
 
+    public AppDetail()
+    {
+    }
+
+    public AppDetail(final String appPackage)
+    {
+        mAppPackage = appPackage;
+    }
+
     //    @SerializedName("icon")
     private transient Drawable mIcon;
 
