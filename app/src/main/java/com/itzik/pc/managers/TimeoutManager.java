@@ -65,7 +65,7 @@ public class TimeoutManager extends BroadcastReceiver
     private long calculateTimeLeft(Context context){
         long spent = UStats.getTimeSpanetToday(context);
         Log.d(LOG_TAG, "calculateTimeLeft(), time spent: " + TimeUnit.MILLISECONDS.toSeconds(spent));
-        long timeLeft = TimeUnit.SECONDS.toMillis(280) - spent;
+        long timeLeft = TimeUnit.SECONDS.toMillis(390) - spent;
         Log.d(LOG_TAG, "calculateTimeLeft(), " +timeLeft);
         return timeLeft;
     }
