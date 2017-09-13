@@ -74,8 +74,9 @@ public class AppItemsAdapter extends RecyclerView.Adapter<AppItemViewHolder>
                 if(mIsMultipulSelection)
                 {
                     app.setIsAllowed(!app.isAllowed());
+                    holder.itemView.setBackgroundColor(app.isAllowed() ? Color.CYAN : Color.TRANSPARENT);
                 }
-                holder.itemView.setBackgroundColor(app.isAllowed() ? Color.CYAN : Color.TRANSPARENT);
+
                 if (mOnClickListener != null)
                 {
                     mOnClickListener.onClick(view, app);

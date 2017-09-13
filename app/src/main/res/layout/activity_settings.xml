@@ -37,14 +37,31 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/setting_set_time_limit"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/transparent"
-        android:drawableTint="@color/colorAccent"
-        android:drawableTop="@drawable/ic_access_time_black_24dp"
-        android:padding="10dp"
-        android:text="Set Time Limit"/>
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/setting_set_time_limit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/transparent"
+            android:drawableTint="@color/colorAccent"
+            android:drawableTop="@drawable/ic_access_time_black_24dp"
+            android:padding="10dp"
+            android:text="Set Time Limit"/>
+
+        <Button
+            android:id="@+id/setting_set_as_default_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/transparent"
+            android:drawableTint="#ffa533a7"
+            android:drawableTop="@drawable/ic_smartphone_black_24dp"
+            android:padding="10dp"
+            android:text="Lock device"/>
+    </LinearLayout>
 </LinearLayout>

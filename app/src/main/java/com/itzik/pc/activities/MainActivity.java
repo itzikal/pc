@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(i);
             }
         });
-
+        mAdapter.setIsMultipulSelection(false);
         list.setLayoutManager(new GridLayoutManager(MainActivity.this, 4));
         list.setAdapter(mAdapter);
     }
