@@ -14,6 +14,7 @@ import com.itzik.pc.dialogs.PasswordDialog;
 import com.itzik.pc.interfaces.AppItemClickListener;
 import com.itzik.pc.managers.AppManager;
 import com.itzik.pc.managers.PreferencesWrapper;
+import com.itzik.pc.managers.TimeoutManager;
 import com.itzik.pc.model.AppDetail;
 import com.itzik.pc.utils.TextUtil;
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity
 {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private AppItemsAdapter mAdapter;
-
+    private TimeoutManager mTimeoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
+        mTimeoutManager = new TimeoutManager();
 
         findViewById(R.id.show_app_list).setOnClickListener(new View.OnClickListener()
         {
@@ -89,13 +90,24 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(final View view, AppDetail app)
             {
-                Intent i = getPackageManager().getLaunchIntentForPackage(app.getAppPackage());
-                startActivity(i);
+
+                if(mTimeoutManager.hasFreeTime(MainActivity.this))
+                {
+                    Intent i = getPackageManager().getLaunchIntentForPackage(app.getAppPackage());
+                    startActivity(i);
+                    mTimeoutManager.setAlarm(MainActivity.this);
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this, "No time left!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         mAdapter.setIsMultipulSelection(false);
         list.setLayoutManager(new GridLayoutManager(MainActivity.this, 4));
         list.setAdapter(mAdapter);
+
     }
 
     @Override
@@ -104,6 +116,7 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         ArrayList<AppDetail> allowedApps = AppManager.getInstance().getAllowedApps();
         mAdapter.addApps(allowedApps);
+        mTimeoutManager.cancelAlarm(MainActivity.this);
     }
 
     @Override

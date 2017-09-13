@@ -31,15 +31,16 @@ public class TimeoutManager extends BroadcastReceiver
         Toast.makeText(context, "Alarm !!!!!!!!!!", Toast.LENGTH_LONG).show(); // For example
         long l = calculateTimeLeft(context);
         Log.d(LOG_TAG, "onReceive(), time left: " +l);
-        if(l > 0)
-        {
-            setAlarm(context);
+//        if(l > 0)
+//        {
+            cancelAlarm(context);
+//            setAlarm(context);
 
-        }
-        else
-        {
+//        }
+//        else
+//        {
             context.startActivity(new Intent(context, MainActivity.class));
-        }
+//        }
 //        wl.release();
     }
 
@@ -65,9 +66,15 @@ public class TimeoutManager extends BroadcastReceiver
     private long calculateTimeLeft(Context context){
         long spent = UStats.getTimeSpanetToday(context);
         Log.d(LOG_TAG, "calculateTimeLeft(), time spent: " + TimeUnit.MILLISECONDS.toSeconds(spent));
-        long timeLeft = TimeUnit.SECONDS.toMillis(390) - spent;
+        long timeLeft = TimeUnit.SECONDS.toMillis(85) - spent;
         Log.d(LOG_TAG, "calculateTimeLeft(), " +timeLeft);
         return timeLeft;
+    }
+
+    public boolean hasFreeTime(Context context)
+    {
+        return calculateTimeLeft(context) > 0;
+
     }
 }
 

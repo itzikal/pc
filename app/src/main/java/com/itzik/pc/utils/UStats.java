@@ -75,6 +75,7 @@ public class UStats
             {
                 onlyUsage.add(usageStats);
                 time+= usageStats.getTotalTimeInForeground();
+                Log.d(LOG_TAG, "getTimeSpanetToday(), app: "+app.getAppName() +", time:" + usageStats.getTotalTimeInForeground());
             }
         }
         Log.d(LOG_TAG, "getUsageStatsList(), total time:" + TimeFormat.format(time) + "("+time+")");
