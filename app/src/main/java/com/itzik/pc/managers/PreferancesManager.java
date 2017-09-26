@@ -10,8 +10,10 @@ import com.itzik.pc.model.AppsList;
 
 public class PreferancesManager
 {
-    public static final String SAVE_PREMITED_APPS = "SAVE_PREMITED_APPS";
+    private static final String SAVE_PREMITED_APPS = "SAVE_PREMITED_APPS";
+    private static final String ALLOWED_TIME = "ALLOWED_TIME";
     private final PreferencesWrapper mPreferencesWrapper;
+
     public PreferancesManager(Context context)
     {
         mPreferencesWrapper = new PreferencesWrapper(context);
@@ -27,4 +29,13 @@ public class PreferancesManager
        return mPreferencesWrapper.getObject(SAVE_PREMITED_APPS, AppsList.class);
     }
 
+    public int getAllowedTime()
+    {
+        return mPreferencesWrapper.getInt(ALLOWED_TIME, -1);
+    }
+
+    public void saveAllowTime(final int allowTime)
+    {
+        mPreferencesWrapper.putInt(ALLOWED_TIME, allowTime);
+    }
 }

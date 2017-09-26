@@ -10,9 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.itzik.pc.R;
-import com.itzik.pc.managers.TimeoutManager;
+import com.itzik.pc.managers.AppManager;
 import com.itzik.pc.services.MyAccessibilityService;
 
 public class SetTimeLimitActivity extends AppCompatActivity
@@ -33,16 +35,47 @@ public class SetTimeLimitActivity extends AppCompatActivity
             Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
             startActivity(intent);
         }
+        final TextView timeLimitValue = (TextView) findViewById(R.id.time_limit_value);
+        final SeekBar seekBar = (SeekBar) findViewById(R.id.time_limit_bar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(final SeekBar seekBar, final int i, final boolean b)
+            {
+                Log.d(LOG_TAG, "onProgressChanged(), to : "+ i);
+                timeLimitValue.setText(i+ " min");
 
-        findViewById(R.id.time_limit_get_stats).setOnClickListener(new View.OnClickListener()
+            }
+
+            @Override
+            public void onStartTrackingTouch(final SeekBar seekBar)
+            {
+                Log.d(LOG_TAG, "onStartTrackingTouch(), ");
+            }
+
+            @Override
+            public void onStopTrackingTouch(final SeekBar seekBar)
+            {
+                Log.d(LOG_TAG, "onStopTrackingTouch(), ");
+            }
+        });
+        
+        findViewById(R.id.time_limit_set_limit).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //                UStats.printCurrentUsageStatus(SetTimeLimitActivity.this);
-                //                    UStats.getUsageStatsList()
-                TimeoutManager t = new TimeoutManager();
-                t.setAlarm(getApplicationContext());
+                int progress = seekBar.getProgress();
+                Log.d(LOG_TAG, "Set time limit to  " + progress);
+                AppManager.getInstance().setAllowTime(progress);
+            }
+        });
+
+        findViewById(R.id.time_limit_clear_limit).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                AppManager.getInstance().setAllowTime(-1);
             }
         });
     }

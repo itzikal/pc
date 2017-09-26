@@ -99,4 +99,14 @@ public class AppManager
     {
         getPreferences().saveApps(mApps);
     }
+
+    public int getAllowedTime()
+    {
+        return getPreferences().getAllowedTime();
+    }
+
+    public void setAllowTime(final int allowTime)
+    {
+        getPreferences().saveAllowTime(allowTime);
+    }
 }
